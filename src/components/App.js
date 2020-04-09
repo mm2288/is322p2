@@ -29,7 +29,7 @@ class App extends React.Component {
       title: taskName,
       id: this.state.tasks.length + 1,
       type: 'task',
-      column: 'todo'
+      column: 'todo',
     });
 
     this.setState({ tasks });
