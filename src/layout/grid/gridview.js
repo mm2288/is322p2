@@ -66,7 +66,7 @@ class GridView extends React.Component {
 
         return (
             <div className="row">
-                <div className="col bg-light rounded m-2 shadow">
+                <div className="col to-do">
                     <h2>
                         To Do
                     </h2>
@@ -75,7 +75,7 @@ class GridView extends React.Component {
                         { todoCards }
                     </div>
                 </div>
-                <div className="col border rounded m-2 shadow">
+                <div className="col in-progress">
                     <h2>
                         In Progress
                     </h2>
@@ -84,7 +84,7 @@ class GridView extends React.Component {
                         { inProgressCards }
                     </div>
                 </div>
-                <div className="col bg-light rounded m-2 shadow">
+                <div className="col review">
                     <h2>
                         Review
                     </h2>
@@ -93,7 +93,7 @@ class GridView extends React.Component {
                         { reviewCards }
                     </div>
                 </div>
-                <div className="col border rounded m-2 shadow">
+                <div className="col done">
                     <h2>
                         Done
                     </h2>
