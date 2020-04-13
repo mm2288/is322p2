@@ -2,8 +2,8 @@
 import React from 'react';
 import axios from 'axios';
 
-import PageTabs from './PageTabs';
-import GridView from './GridView';
+import PageTabs from './layout/PageTabs';
+import GridView from './layout/grid/gridview';
 
 class App extends React.Component {
   state = {
