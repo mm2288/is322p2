@@ -1,0 +1,47 @@
+
+
+/* grid card css*/
+.card {
+  background-color: #F2F4F4;
+  margin: 10px 0;
+}
+
+/*beautifying*/
+
+.col {
+  border: 1px black solid;
+  margin: 5px;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.nav-item:hover {
+  color: #000080;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn {
+  color: black;
+  border: 1px black solid;
+  font-size: 14px;
+}
+
+.btn:hover {
+  background-color: #E0FFFF;
+  border: 1px solid black;
+  color: black;
+}
+
+/*responsive work*/
+@media screen and (max-width: 700px) {
+
+  .in-progress, .review, .done {
+    display: none;
+  }
+
+  .to-do {
+    width: 90%;
+  }
+
+}
