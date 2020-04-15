@@ -3,12 +3,20 @@ import React from 'react';
 import GridCard from '../grid/gridcard';
 
 const COLUMN_NAMES = ['todo', 'in-progress', 'review', 'done'];
+const DESKTOP_BREAKPOINT = 768;
 
 class GridView extends React.Component {
 
     state = {
       breakpoint: 'computer',
-      browserWidth: 0
+      browserWidth: 0,
+      option: 'todo'
+    }
+
+    constructor(props) {
+      super(props);
+      this.onPrevClick = this.onPrevClick.bind(this);
+      this.onNextClick = this.onNextClick.bind(this);
     }
 
     componentDidMount() {
@@ -17,55 +25,44 @@ class GridView extends React.Component {
       window.addEventListener('change', this.changeColumn);
     }
 
-    constructor(props) {
-        super(props);
-
-        this.onPrevClick = this.onPrevClick.bind(this);
-        this.onNextClick = this.onNextClick.bind(this);
-
-    }
 
     resizeScreen = () => {
-      const browserWidth = window.screen.width;
-      let breakpoint = 'computer';
-
-      if (browserWidth <= 768) {
-        breakpoint = 'mobile';
-      }
-
-      this.setState({ breakpoint, browserWidth });
+     const browserWidth = window.innerWidth;
+     let breakpoint = 'computer';
+     if (browserWidth <= DESKTOP_BREAKPOINT) {
+       breakpoint = 'mobile';
+     }
+    this.setState({ breakpoint, browserWidth });
     }
 
     changeColumn = () => {
-      let column = document.getElementById("columns").value;
-      console.log(column);
-      this.setState({ column });
+      let option = document.getElementById("columns").value;
+      console.log(option);
+      this.setState({ option });
     }
 
     findTask(taskId, columnName) {
-        const columnTasks = (columnName === 'in-progress') ? this.props.tasks.inProgress : this.props.tasks[columnName];
-        return columnTasks.find(task => task.id === taskId);
+      const columnTasks = (columnName === 'in-progress') ? this.props.tasks.inProgress : this.props.tasks[columnName];
+      return columnTasks.find(task => task.id === taskId);
     }
 
     onPrevClick(taskId, columnName) {
-        let task = this.findTask(taskId, columnName);
-        let columnIndex = COLUMN_NAMES.findIndex(name => task.column === name);
-
-        if (columnIndex > 0) {
-            columnIndex--
-            task.column = COLUMN_NAMES[columnIndex];
-            this.props.onUpdateTask(task);
-        }
+      let task = this.findTask(taskId, columnName);
+      let columnIndex = COLUMN_NAMES.findIndex(name => task.column === name);
+      if (columnIndex > 0) {
+        columnIndex--
+        task.column = COLUMN_NAMES[columnIndex];
+        this.props.onUpdateTask(task);
+      }
     }
 
     onNextClick(taskId, columnName) {
-        let task = this.findTask(taskId, columnName);
-        let columnIndex = COLUMN_NAMES.findIndex(name => task.column === name);
-
+      let task = this.findTask(taskId, columnName);
+      let columnIndex = COLUMN_NAMES.findIndex(name => task.column === name);
         if (columnIndex < COLUMN_NAMES.length) {
-            columnIndex++
-            task.column = COLUMN_NAMES[columnIndex];
-            this.props.onUpdateTask(task);
+          columnIndex++
+          task.column = COLUMN_NAMES[columnIndex];
+          this.props.onUpdateTask(task);
         }
     }
 
@@ -152,7 +149,7 @@ class GridView extends React.Component {
           }
 
           else if (this.state.breakpoint === 'mobile') {
-              if (this.state.column === 'todo'){
+              if (this.state.option === 'todo'){
                 return (
                   <div className="container">
 
@@ -181,7 +178,7 @@ class GridView extends React.Component {
               }
 
 
-              else if (this.state.column === 'in-progress'){
+              else if (this.state.option === 'in-progress'){
                   return (
                     <div className="container">
 
@@ -211,7 +208,7 @@ class GridView extends React.Component {
 
 
 
-                else if (this.state.column === 'review'){
+                else if (this.state.option === 'review'){
                     return (
                       <div className="container">
 
@@ -239,7 +236,7 @@ class GridView extends React.Component {
                   );
                   }
 
-                  else if (this.state.column === 'done'){
+                  else if (this.state.option === 'done'){
                       return (
                         <div className="container">
 
