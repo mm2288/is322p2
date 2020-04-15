@@ -13,6 +13,7 @@
   margin: 5px;
   padding: 15px;
   border-radius: 15px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
 }
 
 .nav-item:hover {
@@ -31,17 +32,34 @@
   background-color: #E0FFFF;
   border: 1px solid black;
   color: black;
+  font-size: 15px;
 }
 
 /*responsive work*/
+.mobile-nav {
+  display: none;
+}
+
+.mobile-nav h3 {
+  font-size: 14px;
+}
+
+.icon {
+  width: 100px;
+}
+
 @media screen and (max-width: 700px) {
 
-  .in-progress, .review, .done {
+  /*.in-progress, .review, .done {
     display: none;
   }
 
   .to-do {
     width: 90%;
+  }*/
+
+  .mobile-nav {
+    display: inline;
   }
 
 }
