@@ -4,6 +4,10 @@ import axios from 'axios';
 
 import PageTabs from './layout/PageTabs';
 import GridView from './layout/grid/gridview';
+import AddTask from './layout/addtask';
+/*import NavBar from './layout/navbar';*/
+
+const mobileWidth = 768;
 
 class App extends React.Component {
   state = {
@@ -22,8 +26,19 @@ class App extends React.Component {
     this.getTasks();
   }
 
+  handleResize = () => {
+    const browserWidth = window.innerWidth;
+    let breakpoint = 'computer';
+
+    if (browserWidth < mobileWidth) {
+      breakpoint = 'mobile';
+    }
+
+    this.setState({ breakpoint, browserWidth });
+  }
+
   getTasks() {
-    axios.get(' https://my-json-server.typicode.com/ae324/ReactApp_IS322/posts')
+    axios.get('https://my-json-server.typicode.com/ae324/ReactApp_IS322/posts')
         .then(response => {
           this.setState({ allTasks: response.data, sortedTasks: this.sortTasks(response.data) });
         }).catch (error => {
@@ -53,6 +68,17 @@ class App extends React.Component {
     this.setState({ view });
   }
 
+  onAddTask(task) {
+    let tasks = this.state.allTasks;
+
+    task.column = 'todo';
+    task.id = this.state.tasks.length + 1;
+
+    tasks.push(task);
+    let sortedTasks = this.sortTasks(tasks);
+    this.setState({ tasks, sortedTasks, view: 'grid' });
+  }
+
   wrapPage(jsx) {
     const { view } = this.state;
     return (
@@ -64,16 +90,53 @@ class App extends React.Component {
     );
   }
 
-  render() {
-    const { view } = this.state;
 
-    if (view === 'grid') {
+
+
+/*determinePage(event){
+  if (this.state.view === 'grid') {
+    return (this.wrapPage(
+        <GridView tasks={this.state.sortedTasks} onUpdateTask={(task)=> this.onUpdateTask(task)} />
+    ));
+  } else if (this.state.view === 'add') {
+    return (this.wrapPage(
+      <AddTask tasks={this.state.sortedTasks} onSubmit={this.onAddTask.bind(this)} />
+    ));
+  } else {
+    return (this.wrapPage(
+      <h2>Invalid Tab, choose another</h2>
+    ));
+  }
+}*/
+
+
+
+
+
+
+
+  render() {
+    if (this.state.breakpoint === 'mobile'){
+        if (this.state.option === 'todo') {
+          <
+        }
+      )
+    } else {
+    if (this.state.view === 'grid') {
       return (this.wrapPage(
           <GridView tasks={this.state.sortedTasks} onUpdateTask={(task)=> this.onUpdateTask(task)} />
       ));
+    } else if (this.state.view === 'add') {
+      return (this.wrapPage(
+        <AddTask tasks={this.state.sortedTasks} onSubmit={this.onAddTask.bind(this)} />
+      ));
+    } else {
+      return (this.wrapPage(
+        <h2>Invalid Tab, choose another</h2>
+      ));
     }
-
   }
+
 }
 
 export default App;
