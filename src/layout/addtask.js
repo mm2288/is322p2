@@ -1,9 +1,25 @@
 import React from 'react';
 
 class AddTask extends React.Component {
-  state = {
+
+  /*state = {
     title: '',
     type: 'task'
+  }*/
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      title: '',
+      type: 'task'
+    };
+
+    this.changeContent = this.changeContent.bind(this);
+  }
+
+  changeContent(event) {
+    this.setState({type: event.target.value});
   }
 
   onSubmit(event) {
@@ -20,7 +36,7 @@ class AddTask extends React.Component {
       <div className="form">
 
 
-        <form onSubmit={this.onSubmitForm}>
+        <form onSubmit={this.onSubmit}>
         <div className="select-title">
             <label htmlFor="title">New Task Title:</label>
             <input type="text"
@@ -36,7 +52,7 @@ class AddTask extends React.Component {
             <label htmlFor="type">Type:</label>
             <select name="type"
                     className="form-control"
-                    onChange={(e) => this.setState({ type: e.target.value })}>
+                    onChange={/*(e) => this.setState({ type: e.target.value })*/ this.changeContent}>
               <option value="task">Task</option>
               <option value="bug">Bug</option>
               <option value="feature">Feature</option>
