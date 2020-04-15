@@ -2,11 +2,6 @@ import React from 'react';
 
 class AddTask extends React.Component {
 
-  /*state = {
-    title: '',
-    type: 'task'
-  }*/
-
   constructor(props) {
     super(props);
 
@@ -22,7 +17,7 @@ class AddTask extends React.Component {
     this.setState({type: event.target.value});
   }
 
-  onSubmit(event) {
+  onSubmit = (event) => {
     event.preventDefault();
     this.props.onSubmit({
       title: this.state.title,
@@ -52,7 +47,7 @@ class AddTask extends React.Component {
             <label htmlFor="type">Type:</label>
             <select name="type"
                     className="form-control"
-                    onChange={/*(e) => this.setState({ type: e.target.value })*/ this.changeContent}>
+                    onChange={(e) => this.setState({ type: e.target.value })}>
               <option value="task">Task</option>
               <option value="bug">Bug</option>
               <option value="feature">Feature</option>
