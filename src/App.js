@@ -72,7 +72,7 @@ class App extends React.Component {
     let tasks = this.state.allTasks;
 
     task.column = 'todo';
-    task.id = this.state.tasks.length + 1;
+    task.id = this.state.allTasks.length + 1;
 
     tasks.push(task);
     let sortedTasks = this.sortTasks(tasks);
@@ -116,12 +116,12 @@ class App extends React.Component {
 
 
   render() {
-    if (this.state.breakpoint === 'mobile'){
+    /*if (this.state.breakpoint === 'mobile'){
         if (this.state.option === 'todo') {
           <
         }
       )
-    } else {
+    } else {*/
     if (this.state.view === 'grid') {
       return (this.wrapPage(
           <GridView tasks={this.state.sortedTasks} onUpdateTask={(task)=> this.onUpdateTask(task)} />
